@@ -19,15 +19,20 @@ jobs:
     #     node-version: [22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    #steps:
-    #- uses: actions/checkout@v4
-    # - name: Create SSH key
-    #     run: |
-    #       install -m 600 -D /dev/null ~/.ssh/id_rsa
-    #       echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-    #       echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-    #       ls -a
     steps:
+   
+
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install -g pnpm
+    - run: pnpm install
+    - run: pnpm run build
+
+
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.3
       with:
@@ -36,16 +41,9 @@ jobs:
         password: ${{ secrets.SERVER_PASS }}
         port: ${{ secrets.PORT }}
         script: ls -a
-
-    # - uses: actions/checkout@v4
-    # - name: Use Node.js ${{ matrix.node-version }}
-    #   uses: actions/setup-node@v4
-    #   with:
-    #     node-version: ${{ matrix.node-version }}
-    #     cache: 'npm'
-    # - run: npm install -g pnpm
-    # - run: pnpm install
-    # - run: pnpm run build
+        local: './dist/*' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
+        remote: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
+        
 
     # # 连接到ssh，并且做一个拷贝操作的action
     # - name: Deploy 🚀
@@ -58,6 +56,6 @@ jobs:
     #     user: ${{ secrets.SERVER_USER }}
     #     pass: ${{ secrets.SERVER_PASS }}
     #     connect_timeout: 10s
-    #     local: './dist/*' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
-    #     remote: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
+        # local: './dist/*' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
+        # remote: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
     
