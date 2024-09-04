@@ -20,13 +20,23 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
     - name: Create SSH key
-    - run: install -m 600 -D /dev/null ~/.ssh/id_rsa
-    - run: echo "${{ secrets.PUB_KEY }}" > ~/.ssh/id_rsa
-    - run: cat ~/.ssh/id_rsa
-    - run: ssh 198.46.248.64
-    - run: ls -a
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          sudo chmod 600 ~/.ssh/id_rsa
+          ssh 198.46.248.64
+          ls -a
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.PUB_KEY}}
+    # - uses: actions/checkout@v4
+    # - name: Create SSH key
+    # - run: install -m 600 -D /dev/null ~/.ssh/id_rsa
+    # - run: echo "${{ secrets.PUB_KEY }}" > ~/.ssh/id_rsa
+    # - run: cat ~/.ssh/id_rsa
+    # - run: ssh 198.46.248.64
+    # - run: ls -a
     # - name: ls -a 通过 ssh
     #   uses: garygrossgarten/github-action-ssh@release
     #   with:
