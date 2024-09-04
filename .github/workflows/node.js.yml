@@ -22,16 +22,16 @@ jobs:
     steps:
    
 
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install -g pnpm
-    - run: pnpm install
-    - run: pnpm run build
+    # - uses: actions/checkout@v4
+    # - uses: actions/setup-node@v4
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
+    # - run: npm install -g pnpm
+    # - run: pnpm install
+    # - run: pnpm run build
 
 
     - name: executing remote ssh commands using password
@@ -42,7 +42,7 @@ jobs:
         password: ${{ secrets.SERVER_PASS }}
         port: ${{ secrets.PORT }}
         # script: ls -a
-        source: './dist' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
+        source: './src' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
         target: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
         
 
