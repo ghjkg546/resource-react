@@ -40,9 +40,9 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_PASS }}
         port: ${{ secrets.PORT }}
-        script: ls -a
-        local: './dist/*' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
-        remote: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
+        # script: ls -a
+        source: './dist' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
+        target: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
         
 
     # # 连接到ssh，并且做一个拷贝操作的action
