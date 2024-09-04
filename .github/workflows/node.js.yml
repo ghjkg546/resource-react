@@ -22,11 +22,11 @@ jobs:
     steps:
     #- uses: actions/checkout@v4
     - name: Create SSH key
-        run: |
-          install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.PUB_KEY }}" > ~/.ssh/id_rsa
-          ssh 198.46.248.64
-          ls -a
+    - run: install -m 600 -D /dev/null ~/.ssh/id_rsa
+    - run: echo "${{ secrets.PUB_KEY }}" > ~/.ssh/id_rsa
+    - run: cat ~/.ssh/id_rsa
+    - run: ssh 198.46.248.64
+    - run: ls -a
     # - name: ls -a 通过 ssh
     #   uses: garygrossgarten/github-action-ssh@release
     #   with:
