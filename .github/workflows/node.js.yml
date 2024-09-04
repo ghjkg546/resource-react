@@ -32,7 +32,7 @@ jobs:
           pnpm run build   
           ls ./dist
 
-      - uses: actions/checkout@v4
+      #- uses: actions/checkout@v4
       - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.7
         with:
