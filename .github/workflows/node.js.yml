@@ -31,10 +31,10 @@ jobs:
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: ls -a
-        host: https://198.46.248.64/
+        host: 198.46.248.64
         username: root
         passphrase: ""
-        privateKey: ${{ secrets.PUB_KEY}}
+        privateKey: ${{ secrets.PRIVATE_KEY}}
 
     # - uses: actions/checkout@v4
     # - name: Use Node.js ${{ matrix.node-version }}
