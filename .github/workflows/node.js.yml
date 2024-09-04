@@ -41,14 +41,17 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_PASS }}
         port: ${{ secrets.PORT }}
+        run: |
+          mkdir 777 ./your-directory
+          rsync -avz ./your-directory root@198.46.248.64:/usr/local/caddy/site2
         # script: ls -a
         source: './src' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
         target: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
 
-    - name: Upload Directory
-      run: |
-        mkdir 777 ./your-directory
-        rsync -avz ./your-directory/ root@${{ secrets.SERVER_HOST }}:/usr/local/caddy/site2
+    # - name: Upload Directory
+    #   run: |
+    #     mkdir 777 ./your-directory
+    #     rsync -avz ./your-directory/ root@198.46.248.64:/usr/local/caddy/site2
 
     # # 连接到ssh，并且做一个拷贝操作的action
     # - name: Deploy 🚀
