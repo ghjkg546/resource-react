@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -28,4 +28,18 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run build
+
+    # 连接到ssh，并且做一个拷贝操作的action
+    - name: Deploy 🚀
+      uses: cross-the-world/scp-pipeline@master
+      env:
+        WELCOME: "ssh scp ssh pipelines"
+        LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        user: ${{ secrets.SERVER_USER }}
+        pass: ${{ secrets.SERVER_PASS }}
+        connect_timeout: 10s
+        local: './dist/*' # 这里是下一步要创建的vue项目构建完成后的静态资源路径
+        remote: /usr/local/caddy/site2 # 这里是 step1 中，在服务器上创建用于存放静态资源的文件夹
     
