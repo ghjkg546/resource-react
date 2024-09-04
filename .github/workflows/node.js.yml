@@ -30,7 +30,7 @@ jobs:
           npm install -g pnpm
           pnpm install
           pnpm run build   
-          ls ./dist  
+          ls ./dist  ######
       # - uses: actions/checkout@v4
       # - uses: actions/setup-node@v4
       # - name: build dist file
