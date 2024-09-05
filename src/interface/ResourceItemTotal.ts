@@ -1,3 +1,4 @@
+import { CommentEntity } from "./CommonListItem";
 import { ResourceItem } from "./ResourceItem";
 
 
