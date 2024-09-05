@@ -1,13 +1,20 @@
 import { CategoryItem } from "./CategoryItem";
-import { CommonListItem } from "./CommonListItem";
+import { CommentEntity, CommonListItem } from "./CommonListItem";
 import { ResourceItem } from "./ResourceItem";
+import { ResourceItemTotal } from "./ResourceItemTotal";
 
 export interface ResApiResponse {
     code: number;
-    data: ResourceItem | null;
+    data: ResourceItemTotal ;
     msg:string;
   }
 
+
+  export interface CommentApiResponse {
+    code: number;
+    data: CommentEntity[];
+    msg:string;
+  }
 
   
 

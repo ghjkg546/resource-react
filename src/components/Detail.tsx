@@ -1,21 +1,26 @@
 import  { useEffect, useState } from 'react';
-import { fetchFromApi } from '../utils/fetchUtils';
+import { fetchFromApi, postData } from '../utils/fetchUtils';
 import { ResourceItem } from '../interface/ResourceItem';
 import { Link, useParams } from 'react-router-dom';
 import HtmlRenderer from './HtmlRenderer';
-import {  ResApiResponse } from '../interface/ApiResponse';
+import {  CommentApiResponse, ResApiResponse } from '../interface/ApiResponse';
 import { NetDiskItem } from '../interface/NetDiskItem';
+import CommentList from './CommentList';
+import { CommentEntity } from '../interface/CommonListItem';
 
 const Detail = () => {
-  // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<ResourceItem |null>(null);
   const params = useParams()
+  const [comments, setComments] = useState<CommentEntity[] >([]);
   const {id}= params
   const typeMap: { [key: number]: string } = {2:"夸克",3:"百度"}
-  
   useEffect(() => {
     fetchFromApi<ResApiResponse>('/api/res/info?id='+id)
-      .then(responseData => setData(responseData.data?responseData.data:null))
+      .then(responseData => {
+        setData(responseData.data.info?responseData.data.info:null)
+        
+        setComments( responseData.data.comments?responseData.data.comments:[])
+      })
       .catch(err => {
         console.log(err)
       });
@@ -23,6 +28,15 @@ const Detail = () => {
   if(!data){
     return ''
   }
+
+  const handleSendComment = async (content: string) => {
+    postData<CommentApiResponse>('/api/comment/add', { resource_item_id: Number(id), content: content}).then((res) => {
+      console.log(res)
+      setComments(res.data)
+  });
+};
+
+  
 
   const listItems = data.disk_items_array.map((item: NetDiskItem) =>
     <a href={item.url}>
@@ -33,14 +47,13 @@ const Detail = () => {
   );
   return (
     <div className=' p-2 bo'>
+      
       <p className='font-bold text-lg'>{data.name}</p>
       <div className='leading-10 p-2 max-w-full'>
       <HtmlRenderer htmlString={data.description} />
       
       </div>
       <div className='flex mt-2'>
-
-       
        {listItems}
 
 
@@ -48,6 +61,7 @@ const Detail = () => {
         
         
       </div>
+      <CommentList  comments ={comments} postId = {Number(params.id)} onSendComment={handleSendComment} />
     </div>
   );
 };

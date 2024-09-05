@@ -45,7 +45,6 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
     </div>
 
   );
-console.log(data)
   return (
     <div>
       {listItems}

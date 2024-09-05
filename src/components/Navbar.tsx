@@ -36,7 +36,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-gray-800 p-2">
+    <nav className="bg-gray-800 p-2 min-w-full">
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/0" onClick={handleLinkClick}>
          <div className="text-white text-xl font-bold">
