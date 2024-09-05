@@ -1,7 +1,8 @@
 // src/fetchUtils.ts
 
-  const BASE_URL = 'http://localhost:8080'; // Replace with your base URL
+  // const BASE_URL = 'http://localhost:8080'; // Replace with your base URL
 //  const BASE_URL = 'http://198.46.248.64:8080'; // Re
+const BASE_URL =import.meta.env.VITE_APP_BASE_API
 interface FetchOptions extends RequestInit {
   body?: any;
 }
