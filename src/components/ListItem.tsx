@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchFromApi } from '../utils/fetchUtils';
 import { Link } from 'react-router-dom';
 import { ResourceItem } from '../interface/ResourceItem';
-import { ResListApiResponse } from '../interface/ApiResponse';
+import { ResListApiResponse } from '../interface/request/ApiResponse';
 
 
 interface ListItemProps {

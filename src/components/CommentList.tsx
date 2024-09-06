@@ -3,9 +3,6 @@ import React, {  useState } from 'react';
 import { CommentEntity } from '../interface/CommonListItem';
 
 
-// Define the types for the comments
-
-
 // Define the type for the comment options
 interface CommentOption {
     value: string;
@@ -19,14 +16,8 @@ interface CommentProps {
     onSendComment: (content: string) => void;
   }
 
-const CommentList: React.FC<CommentProps> = ({ comments,postId,onSendComment }) => {
-    console.log("postid",postId)
+const CommentList: React.FC<CommentProps> = ({ comments,onSendComment }) => {
     const [selectedOption, setSelectedOption] = useState<string>('all');
-    
-   
-    
-  
-    // Define the options for the select list
     const options: CommentOption[] = [
         { value: '楼主好人一生平安', label: '楼主好人一生平安' },
         { value: '这是我苦苦求的资源呀', label: '这是我苦苦求的资源呀' },
@@ -57,7 +48,7 @@ const CommentList: React.FC<CommentProps> = ({ comments,postId,onSendComment }) 
             <ul className="list-none p-0 min-w-full">
                 {comments.map(comment => (
 
-                    <div className="mx-auto border px-6 py-4 rounded-lg">
+                    <div className="mx-auto border px-6 py-2 rounded-lg mt-2">
                         <div className="flex items-center mb-6">
                             <img
                                 src="https://randomuser.me/api/portraits/men/97.jpg"

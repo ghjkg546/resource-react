@@ -6,7 +6,7 @@ const BASE_URL =import.meta.env.VITE_APP_BASE_API
 interface FetchOptions extends RequestInit {
   body?: any;
 }
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcHAiLCJleHAiOjE3MjU1NDIwMzMsIm5iZiI6MTcyNTQ5NzgzMywianRpIjoiOSJ9.j9KU0hDn9oJy9Tj88_rlVHNg43dFptSU22HCp9a_UEg'
+const token = localStorage.getItem("token")?localStorage.getItem("token"):''
 export const fetchFromApi = async <T>(
   endpoint: string,
   options: FetchOptions = {}

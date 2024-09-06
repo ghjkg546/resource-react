@@ -1,7 +1,7 @@
 import  { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CategoryItem } from '../interface/CategoryItem';
-import { CategoryListApiResponse } from '../interface/ApiResponse';
+import { CategoryListApiResponse } from '../interface/request/ApiResponse';
 import { fetchFromApi } from '../utils/fetchUtils';
 
 const Navbar = () => {
@@ -13,8 +13,6 @@ const Navbar = () => {
 
   const [data, setData] = useState<CategoryItem[] >([]);
 
-
-   // Handler function to hide the element
    const handleLinkClick = () => {
     setIsOpen(false);
   };
@@ -26,7 +24,12 @@ const Navbar = () => {
       });
   }, []);
 
-  
+  const listItemsPc = data.map((item: CategoryItem) =>
+    <Link to={handleUrl(item)} key={item.id} className="text-white block lg:inline-block lg:mt-0 mt-4 px-4 py-2"  onClick={handleLinkClick}>
+            {item.name}
+          </Link>
+
+  );
 
   const listItems = data.map((item: CategoryItem) =>
     <Link to={handleUrl(item)} key={item.id} className="text-white block lg:inline-block lg:mt-0 mt-4 px-4 py-2"  onClick={handleLinkClick}>
@@ -76,18 +79,8 @@ const Navbar = () => {
           </button>
         </div>
         <div className={`lg:flex lg:items-center lg:w-auto hidden`}>
-          <a href="#" className="text-white block lg:inline-block lg:mt-0 mt-4 px-4 py-2">
-            Home
-          </a>
-          <a href="#" className="text-white block lg:inline-block lg:mt-0 mt-4 px-4 py-2">
-            About
-          </a>
-          <a href="#" className="text-white block lg:inline-block lg:mt-0 mt-4 px-4 py-2">
-            Services
-          </a>
-          <a href="#" className="text-white block lg:inline-block lg:mt-0 mt-4 px-4 py-2">
-            Contact
-          </a>
+          
+          {listItemsPc}
         </div>
       </div>
       {/* mobile nav */}
