@@ -25,11 +25,13 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
 
     <div className="bg-white rounded-xl shadow-md " key={item.id}>
       <div className="bg-white rounded-xl shadow-md ">
+      <Link  to={handleUrl(item)}>
         <img
           className="w-full h-48 object-cover"
           src={item.cover_img}
           alt={item.name}
         />
+        </Link>
       </div>
 
       <div className="p-8">
@@ -46,7 +48,7 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
 
   );
   return (
-    <div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {listItems}
     </div>
   );

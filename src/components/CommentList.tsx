@@ -13,12 +13,6 @@ interface CommentOption {
 }
 
 
-
-
-// const positiveComments: Comment[] = allComments.filter(comment =>
-//     comment.text.toLowerCase().includes('great') || comment.text.toLowerCase().includes('fantastic')
-// );
-
 interface CommentProps {
     comments:CommentEntity[];
     postId: number;
@@ -42,12 +36,8 @@ const CommentList: React.FC<CommentProps> = ({ comments,postId,onSendComment }) 
     // Function to handle option change
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedOption(event.target.value);
-        // console.log({ id: 5, text: event.target.value})
         onSendComment(event.target.value);
-        
-   
     };
-
     
 
     return (
@@ -64,10 +54,10 @@ const CommentList: React.FC<CommentProps> = ({ comments,postId,onSendComment }) 
                     </option>
                 ))}
             </select>
-            <ul className="list-none p-0 min-w-full max-w-90p">
+            <ul className="list-none p-0 min-w-full">
                 {comments.map(comment => (
 
-                    <div className="max-w-lg mx-auto border px-6 py-4 rounded-lg">
+                    <div className="mx-auto border px-6 py-4 rounded-lg">
                         <div className="flex items-center mb-6">
                             <img
                                 src="https://randomuser.me/api/portraits/men/97.jpg"
@@ -75,18 +65,15 @@ const CommentList: React.FC<CommentProps> = ({ comments,postId,onSendComment }) 
                                 className="w-12 h-12 rounded-full mr-4"
                             />
                             <div>
-                                <div className="text-lg font-medium text-gray-800">John Doe</div>
-                                <div className="text-gray-500">2 hours ago</div>
+                                <div className="text-sm font-medium text-gray-800">{comment.user.name}</div>
+                                {/* <div className="text-gray-500">2 hours ago</div> */}
                             </div>
                         </div>
-                        <p className="text-lg leading-relaxed mb-6">
+                        <p className="text-sm leading-relaxed mb-6">
                         {comment.content}
                         </p>
                         
                     </div>
-
-
-
 
                 ))}
             </ul>

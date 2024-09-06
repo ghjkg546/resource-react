@@ -55,10 +55,7 @@ const Detail = () => {
       </div>
       <div className='flex mt-2'>
        {listItems}
-
-
         <Link to="/"><button className='p-1 bg-green-500 text-white rounded mr-2'>返回</button></Link>
-        
         
       </div>
       <CommentList  comments ={comments} postId = {Number(params.id)} onSendComment={handleSendComment} />
