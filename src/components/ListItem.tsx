@@ -22,35 +22,43 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
       });
   }, [categoryId]);
   const listItems = data.map((item: ResourceItem) =>
-
-    <div className="bg-white rounded-xl shadow-md " key={item.id}>
-      <div className="bg-white rounded-xl shadow-md ">
-      <Link  to={handleUrl(item)}>
-        <img
-          className="w-full h-48 object-cover"
-          src={item.cover_img}
-          alt={item.name}
-        />
-        </Link>
-      </div>
-
-      <div className="p-8">
-        <Link  to={handleUrl(item)}>
-          <a href="#"
-            className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-              {item.name}
-            </div>
-          </a>
-        </Link>
-      </div>
-    </div>
+<Link  to={handleUrl(item)}>
+<article className="flex flex-col dark:bg-gray-50">
+				<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
+					<img alt="" className="object-cover w-full h-52 dark:bg-gray-500" 
+          src={item.cover_img} />
+				</a>
+				<div className="flex flex-col flex-1 p-6">
+					<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
+					<a rel="noopener noreferrer" href="#" className="text-xs tracking-wider uppercase hover:underline dark:text-violet-600">Convenire</a>
+					<h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{item.name}</h3>
+					<div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-600">
+						<span>June 1, 2020</span>
+						<span>200 阅读</span>
+					</div>
+				</div>
+			</article></Link>
 
   );
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      {listItems}
+    <>
+    <section className="py-6 sm:py-12 dark:bg-gray-100 dark:text-gray-800">
+	<div className="container p-6 mx-auto space-y-8">
+		<div className="space-y-2 text-center">
+			<h2 className="text-3xl font-bold">疾风资源站</h2>
+			<p className="font-serif text-sm dark:text-gray-600">欢迎来到我的资源站,这里可以分享电子游戏、桌游等资源</p>
+		</div>
+		<div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
+    {listItems}
+			
+		</div>
+	</div>
+</section>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+     
     </div>
+    </>
+   
   );
 };
 function handleUrl(item: ResourceItem) {

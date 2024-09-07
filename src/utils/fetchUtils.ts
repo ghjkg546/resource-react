@@ -6,11 +6,12 @@ const BASE_URL =import.meta.env.VITE_APP_BASE_API
 interface FetchOptions extends RequestInit {
   body?: any;
 }
-const token = localStorage.getItem("token")?localStorage.getItem("token"):''
+
 export const fetchFromApi = async <T>(
   endpoint: string,
   options: FetchOptions = {}
 ): Promise<T> => {
+  const token = localStorage.getItem("token")?localStorage.getItem("token"):''
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     ...options,
     
@@ -32,7 +33,7 @@ export const fetchFromApi = async <T>(
 
 export async function postData<T>(url: string, data: object): Promise<T> {
   try {
-      // Perform the POST request
+    const token = localStorage.getItem("token")?localStorage.getItem("token"):''
       const response = await fetch( BASE_URL+url, {
           method: 'POST',
           headers: {
