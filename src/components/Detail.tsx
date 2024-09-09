@@ -74,7 +74,7 @@ const Detail = () => {
     <div className="flex flex-wrap py-6 gap-2 border-t border-dashed dark:border-gray-600">
     {listItems}
 		</div>
-    {/* <CommentList  comments ={comments} postId = {Number(params.id)} onSendComment={handleSendComment} /> */}
+    {<CommentList  comments ={comments} postId = {Number(params.id)} onSendComment={handleSendComment} /> }
     <Link to="/"><button className='p-1 bg-green-500 text-white rounded mr-2'>返回</button></Link>
 	</div>
 </div>
@@ -83,10 +83,6 @@ const Detail = () => {
       
       
       </div>
-      
-       
-        
-        
  
       
     </div>
