@@ -56,19 +56,15 @@ const Detail = () => {
 			<div className="flex flex-col items-start justify-between w-full md:flex-row md:items-center dark:text-gray-600">
 				<div className="flex items-center md:space-x-2">
 					<img src="https://source.unsplash.com/75x75/?portrait" alt="" className="w-4 h-4 border rounded-full dark:bg-gray-500 dark:border-gray-300" />
-					<p className="text-sm">Leroy Jenkins • July 19th, 2021</p>
+					<p className="text-sm">管理员 • {data.create_time_str}</p>
 				</div>
-				<p className="flex-shrink-0 mt-3 text-sm md:mt-0">4 min read • 1,570 views</p>
+				<p className="flex-shrink-0 mt-3 text-sm md:mt-0"> {data.views} views</p>
 			</div>
 		</div>
 		
 	</article>
 	<div>
-		<div className="flex flex-wrap py-6 gap-2 border-t border-dashed dark:border-gray-600">
-			<a rel="noopener noreferrer" href="#" className="px-3 py-1 rounded-sm hover:underline dark:bg-violet-600 dark:text-gray-50">#MambaUI</a>
-			<a rel="noopener noreferrer" href="#" className="px-3 py-1 rounded-sm hover:underline dark:bg-violet-600 dark:text-gray-50">#TailwindCSS</a>
-			<a rel="noopener noreferrer" href="#" className="px-3 py-1 rounded-sm hover:underline dark:bg-violet-600 dark:text-gray-50">#Angular</a>
-		</div>
+		
 		<div className="space-y-2">
     <HtmlRenderer htmlString={data.description} />
 		</div>
@@ -78,7 +74,7 @@ const Detail = () => {
     <div className="flex flex-wrap py-6 gap-2 border-t border-dashed dark:border-gray-600">
     {listItems}
 		</div>
-    <CommentList  comments ={comments} postId = {Number(params.id)} onSendComment={handleSendComment} />
+    {/* <CommentList  comments ={comments} postId = {Number(params.id)} onSendComment={handleSendComment} /> */}
     <Link to="/"><button className='p-1 bg-green-500 text-white rounded mr-2'>返回</button></Link>
 	</div>
 </div>
