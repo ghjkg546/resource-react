@@ -7,11 +7,10 @@ import { Pagination } from 'antd';
 
 interface ListItemProps {
   categoryId: number|string;
+  keyword:string;
 }
 
-const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
-  // const categoryId =1
-  // const [isOpen, setIsOpen] = useState(false);
+const ListItem:React.FC<ListItemProps> = ({ categoryId ,keyword })  => {
   const [data, setData] = useState<ResourceItem[] >([]);
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
@@ -19,7 +18,6 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
 
  
   const onChange = async (page:number) => {
-    console.log(page)
     setPage(page)
     getList(page)
   };
@@ -27,7 +25,7 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
  
 
   const getList =(pageNum:number)=>{
-    fetchFromApi<ResListApiResponse>('/api/res/list?category_id='+categoryId+'&pageNum='+pageNum)
+    fetchFromApi<ResListApiResponse>('/api/res/list?category_id='+categoryId+'&pageNum='+pageNum+'&keyword='+keyword)
     .then(responseData => {
       setData(responseData.data.list?responseData.data.list:[])
       setTotal(responseData.data.total)
@@ -40,7 +38,7 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
   
   useEffect(() => {
    getList(1)
-  }, [categoryId]);
+  }, [categoryId,keyword]);
   const listItems = data.map((item: ResourceItem) =>
 <Link  to={handleUrl(item)}>
 <article className="flex flex-col dark:bg-gray-50">
