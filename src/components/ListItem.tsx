@@ -26,7 +26,7 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
 <article className="flex flex-col dark:bg-gray-50">
 				<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum">
 					<img alt="" className="object-cover w-full h-52 dark:bg-gray-500" 
-          src={item.cover_img} />
+          src={item.cover_img?item.cover_img:'noimage.png'} />
 				</a>
 				<div className="flex flex-col flex-1 p-6">
 					<a rel="noopener noreferrer" href="#" aria-label="Te nulla oportere reprimique his dolorum"></a>
