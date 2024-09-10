@@ -3,7 +3,7 @@ import { fetchFromApi } from '../utils/fetchUtils';
 import { Link } from 'react-router-dom';
 import { ResourceItem } from '../interface/ResourceItem';
 import { ResListApiResponse } from '../interface/request/ApiResponse';
-
+import { Pagination } from 'antd';
 
 interface ListItemProps {
   categoryId: number|string;
@@ -13,13 +13,33 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
   // const categoryId =1
   // const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<ResourceItem[] >([]);
+  const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
+  
+
+ 
+  const onChange = async (page:number) => {
+    console.log(page)
+    setPage(page)
+    getList(page)
+  };
+
+ 
+
+  const getList =(pageNum:number)=>{
+    fetchFromApi<ResListApiResponse>('/api/res/list?category_id='+categoryId+'&pageNum='+pageNum)
+    .then(responseData => {
+      setData(responseData.data.list?responseData.data.list:[])
+      setTotal(responseData.data.total)
+    })
+    .catch(err => {
+      console.log(err)
+    });
+  }
+
   
   useEffect(() => {
-    fetchFromApi<ResListApiResponse>('/api/res/list?category_id='+categoryId)
-      .then(responseData => setData(responseData.data.list?responseData.data.list:[]))
-      .catch(err => {
-        console.log(err)
-      });
+   getList(1)
   }, [categoryId]);
   const listItems = data.map((item: ResourceItem) =>
 <Link  to={handleUrl(item)}>
@@ -52,6 +72,7 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
     {listItems}
 			
 		</div>
+    <Pagination defaultCurrent={1} current={page} total={total} onChange={onChange} />
 	</div>
 </section>
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -64,5 +85,7 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId })  => {
 function handleUrl(item: ResourceItem) {
   return "/detail/" + item.id;
 }
+
+
 
 export default ListItem;

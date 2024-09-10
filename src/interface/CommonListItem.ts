@@ -2,6 +2,7 @@ import { UserEntity } from "./UserEntity";
 
 export interface CommonListItem <T>{
     list:T[];
+    total:number;
   }
 
 
