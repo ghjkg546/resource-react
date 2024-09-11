@@ -8,6 +8,7 @@ import { NetDiskItem } from '../interface/NetDiskItem';
 import CommentList from './CommentList';
 import { CommentEntity } from '../interface/CommonListItem';
 import { LOGIN_ERROR } from '../utils/constValue';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const Detail = () => {
   const [data, setData] = useState<ResourceItem |null>(null);
@@ -58,7 +59,7 @@ const Detail = () => {
 					<img src="https://source.unsplash.com/75x75/?portrait" alt="" className="w-4 h-4 border rounded-full dark:bg-gray-500 dark:border-gray-300" />
 					<p className="text-sm">管理员 • {data.create_time_str}</p>
 				</div>
-				<p className="flex-shrink-0 mt-3 text-sm md:mt-0"> {data.views} views</p>
+				<p className="flex-shrink-0 mt-3 text-sm md:mt-0"><VisibilityIcon /> {data.views} </p>
 			</div>
 		</div>
 		

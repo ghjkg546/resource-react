@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ResourceItem } from '../interface/ResourceItem';
 import { ResListApiResponse } from '../interface/request/ApiResponse';
 import { Pagination } from 'antd';
+import Visibility from '@mui/icons-material/Visibility';
 
 interface ListItemProps {
   categoryId: number|string;
@@ -52,7 +53,7 @@ const ListItem:React.FC<ListItemProps> = ({ categoryId ,keyword })  => {
 					<h3 className="flex-1 py-2 text-lg font-semibold leading-snug">{item.name}</h3>
 					<div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-600">
 						<span>{item.create_time_str}</span>
-						<span>{item.views} 阅读</span>
+						<span><Visibility className='pr-1'/>{item.views} </span>
 					</div>
 				</div>
 			</article></Link>
